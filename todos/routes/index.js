@@ -1,5 +1,5 @@
 var express = require('express');
-var connection = require('../util/dbConn');
+var pool = require('../util/dbPool');
 var sql = require('../dao/todosSqlMapping');
 var path = require('path');
 var router = express.Router();
@@ -9,26 +9,22 @@ router.get('/', function(req, res, next) {
 
   res.sendFile(path.join(__dirname, '../views/index.html'));
 
-  //connection.connect();
-
-//  connection.query(sql.queryAll, function(err, rows, fields){
-//    res.send(rows);
-//  });
-
-//  connection.end();
-
   //res.render('index', { title: 'Express' });
 });
 
 
 router.get('/queryAll', function(req, res, next) {
-  connection.connect();
+  //connection.connect();
 
-  connection.query(sql.queryAll, function(err, results, fields){
-    res.send(results);
+  pool.getConnection(function(err, connection) {
+    connection.query(sql.queryAll, function(err, results, fields){
+      res.send(results);
+      connection.release();
+    });
   });
 
-  connection.end();
+  //connection.end();
+
 });
 
 module.exports = router;

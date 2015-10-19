@@ -9,7 +9,12 @@ var TodoStore = require('../stores/TodoStore');
 var TodoApp = React.createClass({
 
   getInitialState: function() {
-    return TodoStore.getAll();
+    console.log("init state.");
+    return TodoStore.getTodos();
+  },
+
+  componentWillMount: function() {
+    TodoStore.getAll();
   },
 
   componentDidMount: function() {
