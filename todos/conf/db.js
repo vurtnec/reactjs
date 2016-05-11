@@ -1,11 +1,11 @@
 module.exports = {
   mysqlConf: {
 
-    host:'vurtnec2015.mysql.rds.aliyuncs.com',
+    host:'',
 
-    user:'vurtnec',
+    user:'xxxxxx',
 
-    password:'296519',
+    password:'xxxxx',
 
     database: 'todos'
   }
